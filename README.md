@@ -2,7 +2,7 @@
 
 - 👋 Hi, I’m @haegarAI ... also known as Stefan
 - 👀 I’m interested in ... Opensource and GPL software
-- 🌱 I’m currently learning ...GIT,clouds,lifecycling
+- 🌱 I’m currently learning ...GIThub,clouds,lifecycling
 - 💞️ I’m looking to collaborate on ...developers , to create tools for operations colleagues, to make their life more efficient 
 - 📫 How to reach me ... on Teams
 - ⚡ Fun fact: ...42 
