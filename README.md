@@ -6,6 +6,8 @@
 
 [pam wallix ssh access](https://pamaccessmanager.a1.group/wabam/a1aut?domain=SAML-austria.local)
 
+[snow](https://a1prod.service-now.com/navpage.do)
+
 [markdown - md - quickie](https://www.markdownguide.org/extended-syntax/)
 
 - 👋 Hi, I’m @haegarAI ... also known as Stefan
