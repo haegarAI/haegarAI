@@ -4,6 +4,8 @@
 
 [important links](https://tasktrack.telekom.at/confluence/display/UXOS/Links)
 
+[pam wallix ssh access](https://pamaccessmanager.a1.group/wabam/a1aut?domain=SAML-austria.local)
+
 [markdown - md - quickie](https://www.markdownguide.org/extended-syntax/)
 
 - 👋 Hi, I’m @haegarAI ... also known as Stefan
