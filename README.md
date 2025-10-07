@@ -2,6 +2,8 @@
 
 [my kanban](https://github.com/orgs/A1-Group-Base/projects/11/views/5)
 
+[important links](https://tasktrack.telekom.at/confluence/display/UXOS/Links)
+
 [markdown - md - quickie](https://www.markdownguide.org/extended-syntax/)
 
 - 👋 Hi, I’m @haegarAI ... also known as Stefan
