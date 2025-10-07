@@ -21,3 +21,4 @@
 haegarAI/haegarAI is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 You can click the Preview link to take a look at your changes.
 --->
+<img width="139" height="139" alt="tux_obiwan" src="https://github.com/user-attachments/assets/1b3e7d86-ef40-47b7-9dbe-51d5408b3242" />
