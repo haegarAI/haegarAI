@@ -2,6 +2,8 @@
 
 [my kanban](https://github.com/orgs/A1-Group-Base/projects/11/views/5)
 
+[Team Wiki](https://cpd-team-wiki.cloud.inside/)
+
 [important links](https://tasktrack.telekom.at/confluence/display/UXOS/Links)
 
 [pam wallix ssh access](https://pamaccessmanager.a1.group/wabam/a1aut?domain=SAML-austria.local)
