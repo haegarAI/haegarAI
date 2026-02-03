@@ -29,6 +29,8 @@ ArgoCD
 
 [dev](https://argocd.dev.at.cloud.inside/application)
 
+[my space](https://wiki.cloud.inside/s/cpd/p/stefan-ep-haegar-ai-CCx8H42rIq)
+
 [nonprod](https://argocd.nonprod.at.cloud.inside/application)
 
 [PROD](https://argocd.prod.at.cloud.inside/application)
