@@ -1,0 +1,72 @@
+~~~
+Created by Wannemacher Mario on Feb 28, 2025
+Explanation of most of the commands can be found on the parent page.
+
+Commands:
+
+subscription-manager repos --enable=rhel-8-for-x86_64-highavailability-rpms
+yum install pcs pacemaker fence-agents-all
+
+only if user was not created during install:
+useradd -g 10103 -G 10103 -c "cluster user" -m hacluster
+vi /etc/passwd
+chage -W -1 -M -1 -m -1 hacluster
+chage -l hacluster
+passwd hacluster
+
+systemctl start pcsd.service
+systemctl enable pcsd.service
+systemctl status pcsd.service
+lvextend -r -L+10G /dev/mapper/vg_sys-log
+
+yum install pcp-zeroconf
+pcs host auth lxeaioi101.at.inside lxeaioi102.at.inside
+pcs cluster setup tibco_cluster --start lxeaioi101.at.inside lxeaioi102.at.inside
+pcs cluster enable --all
+pcs cluster status
+
+vi /etc/systemd/logind.conf (HandlePowerKey=ignore)
+systemctl restart systemd-logind
+
+
+yum install ipmitool OpenIPMI
+sudo systemctl start ipmi
+sudo systemctl enable ipmi
+
+Enable ipmi on dell idrac and set encryption key.
+
+Fencing test:
+time fence_ipmilan -a 10.89.236.2 -P -l root -p 'XXX' --hexadecimal-kg='XXX' --login-timeout=60 --shell-timeout=60 -o status -v
+
+pcs stonith create tibco_fence_101 fence_ipmilan pcmk_host_list="lxeaioi101.at.inside" ip="10.89.236.2" username="root" password="XXX" lanplus=1  power_wait=4 pcmk_delay_base=5s hexadecimal_kg="XXX"
+pcs stonith create tibco_fence_102 fence_ipmilan pcmk_host_list="lxeaioi102.at.inside" ip="10.89.236.3" username="root" password="XXX" lanplus=1  power_wait=4 hexadecimal_kg="XXX"
+pcs stonith config tibco_fence_101
+pcs stonith status
+pcs status
+pcs config backup tibco_cluster
+
+subscription-manager repos --enable=rhel-8-for-x86_64-resilientstorage-rpms
+yum install lvm2-lockd gfs2-utils dlm
+vi /etc/lvm/lvm.conf (use_lvmlockd = 1)
+systemctl start lvmlockd
+systemctl enable lvmlockd
+
+pcs property set no-quorum-policy=freeze
+pcs resource create dlm --group tibco_cluster ocf:pacemaker:controld op monitor interval=30s on-fail=fence
+pcs resource clone tibco_cluster interleave=true
+pcs resource create lvmlockd --group tibco_cluster ocf:heartbeat:lvmlockd op monitor interval=30s on-fail=fence
+pcs status --full
+
+vgcreate --shared vg_tibco /dev/mapper/mpathc
+mkdir /usr/global/tibcogfs2
+lvcreate --activate sy -l100%VG -n usr_global_tibcogfs2 vg_tibco
+mkfs.gfs2 -j2 -p lock_dlm -t tibco_cluster:gfs2-demo1 /dev/vg_tibco/usr_global_tibcogfs2
+
+pcs status
+pcs resource create sharedtibco --group vg_tibco ocf:heartbeat:LVM-activate lvname=usr_global_tibcogfs2 vgname=vg_tibco activation_mode=shared vg_access_mode=lvmlockd
+pcs resource clone vg_tibco interleave=true
+pcs constraint order start tibco_cluster-clone then vg_tibco-clone
+pcs constraint colocation add vg_tibco-clone with tibco_cluster-clone
+pcs resource create sharedtibco1 --group vg_tibco ocf:heartbeat:Filesystem device="/dev/vg_tibco/usr_global_tibcogfs2" directory="/usr/global/tibcogfs2" fstype="gfs2" options=noatime op monitor interval=10s on-fail=fence
+
+~~~
