@@ -2,6 +2,8 @@
 
 [my conf](https://tasktrack.telekom.at/confluence/spaces/viewspace.action?key=~umxf76p)
 
+[my tokens](https://github.com/settings/personal-access-tokens)
+
 [my kanban](https://github.com/orgs/A1-Group-Base/projects/11/views/5)
 
 [Team Wiki](https://cpd-team-wiki.cloud.inside/)
